@@ -29,18 +29,25 @@ const createAppointment = (request, responce) => {
         }
     })
 }
-const deleteBuyer = (request,responce)=>{
+const deleteBuyer =(request , responce) => {
     const _id = request.params._id;
+    const requestID = request.body._id;
     console.log(_id);
-    buyerModel.deleteOne({_id:_id},(error,buyerr)=>{
-        if(error){
+    console.log(requestID);
+    buyerModel.findOne({_id:_id}, (error, buyerr) => {
+        if (error){
             responce.send(error)
-        }else{
-            responce.send(buyerr);
-            console.log( request.query);
         }
-    })
+        else{ 
+            console.log(buyerr.buyers);
+           buyerr.buyers = buyerr.buyers.filter(value=>value._id != requestID);
+           buyerr.save();
+            responce.send(buyerr); 
+            //  console.log( request.query); 
+            console.log(buyerr.buyers);
+        }
+    });
+   
 }
-
 
 module.exports = { getBuyers , deleteBuyer, createAppointment };
