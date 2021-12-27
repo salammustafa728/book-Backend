@@ -42,7 +42,7 @@ const deleteBuyer =(request , responce) => {
             console.log(buyerr.buyers);
            buyerr.buyers = buyerr.buyers.filter(value=>value._id != requestID);
            buyerr.save();
-            responce.send(buyerr); 
+            responce.send(buyerr.buyers); 
             //  console.log( request.query); 
             console.log(buyerr.buyers);
         }
