@@ -4,12 +4,12 @@ const { request } = require('express');
 
 const getBuyers = (request , responce) => {
     buyerModel.find({}, (error, buyer) => {
-        console.log(buyer)
+        // console.log(buyer)
         if (error){
             responce.send(error)
         }
         else{
-            console.log( request.query);
+            // console.log( request.query);
             responce.json(buyer);   
         }
     });
@@ -22,7 +22,7 @@ const createAppointment = (request, responce) => {
         if (error) {
             responce.status(400).send(error);        }
         else {
-            console.log(buyer);
+            // console.log(buyer);
             buyer.buyers.push({ name: name, description: description, phone: phone });
             buyer.save();
             responce.json(buyer);
@@ -30,21 +30,21 @@ const createAppointment = (request, responce) => {
     })
 }
 const deleteBuyer =(request , responce) => {
-    const _id = request.params._id;
-    const requestID = request.body._id;
-    console.log(_id);
-    console.log(requestID);
-    buyerModel.findOne({_id:_id}, (error, buyerr) => {
+    const {userid,objid} = request.params;
+    // const requestID = request.body._id;
+    console.log(userid,objid);
+    // console.log(requestID);
+    buyerModel.findOne({_id:userid}, (error, buyerr) => {
         if (error){
             responce.send(error)
         }
         else{ 
-            console.log(buyerr.buyers);
-           buyerr.buyers = buyerr.buyers.filter(value=>value._id != requestID);
+            // console.log(buyerr.buyers);
+           buyerr.buyers = buyerr.buyers.filter(value=>value._id != objid);
            buyerr.save();
             responce.send(buyerr.buyers); 
             //  console.log( request.query); 
-            console.log(buyerr.buyers);
+            // console.log(buyerr.buyers);
         }
     });
    

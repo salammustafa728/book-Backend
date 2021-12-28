@@ -26,7 +26,7 @@ app.delete("/seller/:_id",deleteSeller);
 
 // get buyer data 
 app.get("/buyer",getBuyers);
-app.delete("/buyer/:_id",deleteBuyer);
+app.delete("/buyer/:userid/:objid",deleteBuyer);
 app.post("/buyer",createAppointment);
 
 app.get('/',(x,y)=>{
